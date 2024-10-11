@@ -46,7 +46,7 @@ export default function UserList() {
       </div>
       <div className='flex flex-wrap items-center justify-center gap-4'>
         {data && data.length > 0 ? (
-          [...data, manualUser]
+          [...data, manualUser] // if there is user coming from localstorage add that too
             .filter((u) => !!u)
             .map((user) => <UserCard key={user.id} user={user} />)
         ) : (

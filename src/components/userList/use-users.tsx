@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query';
 import { BASE } from '../../lib/constants';
-import { LoaderCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -13,9 +12,9 @@ export interface User {
 
 export const useUsers = () => {
   const { toast } = useToast();
-  const [open, setOpen] = useState(false);
-  const [manualUser, setManualUser] = useState<User | undefined>(undefined);
-  const [refresh, setRefresh] = useState(0);
+  const [open, setOpen] = useState(false); // modal state
+  const [manualUser, setManualUser] = useState<User | undefined>(undefined); // user form localstorage if there is one
+  const [refresh, setRefresh] = useState(0); // to refresh the list on submitting new user
 
   useEffect(() => {
     const returnStoredUser = () => {
@@ -32,7 +31,7 @@ export const useUsers = () => {
     };
 
     setManualUser(returnStoredUser());
-  }, [refresh]);
+  }, [refresh]); // will get refreshed on submit
 
   const fetchUsers = async () => {
     const response = await fetch(BASE + '/users');
@@ -52,5 +51,6 @@ export const useUsers = () => {
       });
     },
   });
+
   return { data, isLoading, open, setOpen, manualUser, setRefresh };
 };

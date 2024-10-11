@@ -50,6 +50,7 @@ export default function CreateUser({
     form.reset();
     submitCallback();
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
